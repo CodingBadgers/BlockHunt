@@ -507,9 +507,9 @@ public class BlockHunt extends JavaPlugin implements Listener {
 									}
 								}
 							}
-							if (arena.timer == 190) {
+							if (arena.timer == 180) {
 								ArenaHandler.sendFMessage(arena,
-										ConfigC.normal_ingameArenaEnd, "1-190");
+										ConfigC.normal_ingameArenaEnd, "1-180");
 							} else if (arena.timer == 60) {
 								ArenaHandler.sendFMessage(arena,
 										ConfigC.normal_ingameArenaEnd, "1-60");
