@@ -53,6 +53,7 @@ public class OnEntityDamageByEntityEvent implements Listener {
 
 							if (event.getDamage() >= player.getHealth()) {
 								player.setHealth(20);
+								player.getActivePotionEffects().clear();
 								event.setCancelled(true);
 
 								DisguiseAPI.undisguiseToAll(player);

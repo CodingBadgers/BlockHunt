@@ -63,6 +63,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class BlockHunt extends JavaPlugin implements Listener {
 	/**
@@ -417,6 +419,10 @@ public class BlockHunt extends JavaPlugin implements Listener {
 											disguise);
 
 									arenaPlayer.teleport(arena.hidersWarp);
+									
+									// Give hiders temporary speed potion
+									PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, (int) (arena.waitingTimeSeeker * 20L), 2, true);	
+									arenaPlayer.addPotionEffect(effect, true);
 
 									ItemStack blockCount = new ItemStack(block
 											.getType(), 5);
@@ -485,6 +491,10 @@ public class BlockHunt extends JavaPlugin implements Listener {
 							if (W.seekertime.get(player) <= 0) {
 								player.teleport(arena.hidersWarp);
 								W.seekertime.remove(player);
+								
+								// Give players speed potion
+								PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, (int) (arena.gameTime * 20L), 0, true);	
+								player.addPotionEffect(effect, true);
 							}
 						}
 					}
