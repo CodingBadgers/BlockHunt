@@ -284,10 +284,10 @@ public class BlockHunt extends JavaPlugin implements Listener {
 					}
 				} catch (IOException e) {
 					MessageM.sendMessage(null,
-							"%TAG%EUnable to send %AMCStats %Eto the server. Something went wrong ;(!");
+							"%TAG%EUnable to send %AMCStats %Eto the server. Something went wrong!");
 				} catch (InvalidConfigurationException e) {
 					MessageM.sendMessage(null,
-							"%TAG%EUnable to send %AMCStats %Eto the server. Something went wrong ;(!");
+							"%TAG%EUnable to send %AMCStats %Eto the server. Something went wrong!");
 				}
 			}
 		}, 0, 6000);
