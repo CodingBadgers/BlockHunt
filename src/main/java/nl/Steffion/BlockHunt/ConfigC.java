@@ -165,6 +165,10 @@ public enum ConfigC {
 			W.messages),
 	normal_shopChoosenBlock ("%TAG%NYou've choosen to be a(n) '%A%block%%N' block!",
 			W.messages),
+	normal_playerReady ("%TAG%NPlayer %A%ready%%N is ready!",
+			W.messages),
+	normal_numberOfReady("%TAG%NThere are %A%numReady%%N players ready out of %A%maxNum%%N...",
+			W.messages),
 
 	warning_lobbyNeedAtleast ("%TAG%WYou need atleast %A%1%%W player(s) to start the game!",
 			W.messages),

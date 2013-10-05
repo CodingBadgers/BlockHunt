@@ -314,15 +314,7 @@ public class BlockHunt extends JavaPlugin implements Listener {
 			@Override
 			public void run() {
 				for (Arena arena : W.arenaList) {
-					if (arena.gameState == ArenaState.WAITING) {
-						if (arena.playersInArena.size() >= arena.minPlayers) {
-							arena.gameState = ArenaState.STARTING;
-							arena.timer = arena.timeInLobbyUntilStart;
-							ArenaHandler.sendFMessage(arena,
-									ConfigC.normal_lobbyArenaIsStarting, "1-"
-											+ arena.timeInLobbyUntilStart);
-						}
-					} else if (arena.gameState == ArenaState.STARTING) {
+					if (arena.gameState == ArenaState.STARTING) {
 						arena.timer = arena.timer - 1;
 						if (arena.timer > 0) {
 							if (arena.timer == 60) {

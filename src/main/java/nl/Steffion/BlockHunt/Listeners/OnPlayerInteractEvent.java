@@ -129,6 +129,54 @@ public class OnPlayerInteractEvent implements Listener {
 				}
 			}
 		}
+		
+		if (event.getAction() == Action.LEFT_CLICK_BLOCK
+				|| event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			
+			Player clickPlayer = event.getPlayer();
+			if (event.getClickedBlock().getType().equals(Material.IRON_BLOCK)) {
+				
+				for (Arena arena : W.arenaList) { 
+					if (arena.gameState == ArenaState.WAITING) {	
+						
+						if (!arena.playersInArena.contains(clickPlayer))
+							continue;
+						
+						if (arena.playersInArena.size() < arena.minPlayers) {
+							ArenaHandler.sendFMessage(
+									arena,
+									ConfigC.warning_lobbyNeedAtleast,
+									"1-" + arena.minPlayers);
+							break;
+						}
+						
+						if (!arena.readyPlayers.contains(clickPlayer)) {
+							arena.readyPlayers.add(clickPlayer);
+							
+							ArenaHandler.sendFMessage(
+									arena,
+									ConfigC.normal_playerReady,
+									"ready-" + clickPlayer.getName());
+							
+							ArenaHandler.sendFMessage(
+									arena,
+									ConfigC.normal_numberOfReady,
+									"numReady-" + arena.readyPlayers.size(), "maxNum-" + arena.playersInArena.size());
+							
+							if (arena.readyPlayers.size() == arena.playersInArena.size()) {
+								arena.readyPlayers.clear();
+								arena.gameState = ArenaState.STARTING;
+								arena.timer = arena.timeInLobbyUntilStart;
+								ArenaHandler.sendFMessage(arena,
+										ConfigC.normal_lobbyArenaIsStarting, "1-"
+												+ arena.timeInLobbyUntilStart);
+							}
+						}
+					}
+				}
+			}
+			
+		}
 
 		if (event.getAction() == Action.LEFT_CLICK_BLOCK
 				|| event.getAction() == Action.LEFT_CLICK_BLOCK) {

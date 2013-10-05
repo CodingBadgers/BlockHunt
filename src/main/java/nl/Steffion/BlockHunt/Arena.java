@@ -39,6 +39,7 @@ public class Arena implements ConfigurationSerializable {
 	public int killTokens;
 
 	public List<Player> playersInArena;
+	public List<Player> readyPlayers;	
 	public ArenaState gameState;
 	public int timer;
 	public List<Player> seekers;
@@ -77,6 +78,7 @@ public class Arena implements ConfigurationSerializable {
 		this.killTokens = killTokens;
 
 		this.playersInArena = playersInArena;
+		this.readyPlayers = new ArrayList<Player>();
 		this.gameState = gameState;
 		this.timer = timer;
 		this.seekers = seekers;
