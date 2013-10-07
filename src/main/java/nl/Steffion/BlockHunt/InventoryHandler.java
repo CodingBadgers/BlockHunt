@@ -1,7 +1,6 @@
 package nl.Steffion.BlockHunt;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import nl.Steffion.BlockHunt.Arena.ArenaType;
 import nl.Steffion.BlockHunt.Managers.MessageM;
