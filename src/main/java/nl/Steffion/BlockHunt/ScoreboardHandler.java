@@ -1,5 +1,7 @@
 package nl.Steffion.BlockHunt;
 
+import java.util.HashMap;
+
 import nl.Steffion.BlockHunt.Arena.ArenaState;
 import nl.Steffion.BlockHunt.Managers.MessageM;
 
@@ -11,6 +13,9 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
 public class ScoreboardHandler {
+	
+	static HashMap<String, Scoreboard> originalScoreboards = new HashMap<String, Scoreboard>();
+	
 	public static void createScoreboard(Arena arena) {
 		if ((Boolean) W.config.get(ConfigC.scoreboard_enabled) == true) {
 			Scoreboard board = arena.scoreboard;
@@ -38,12 +43,17 @@ public class ScoreboardHandler {
 			hiders.setScore(arena.playersInArena.size() - arena.seekers.size());
 			if (arena.gameState == ArenaState.INGAME) {
 				for (Player pl : arena.playersInArena) {
+					if (!ScoreboardHandler.originalScoreboards.containsKey(pl.getName()))
+						ScoreboardHandler.originalScoreboards.put(pl.getName(), pl.getScoreboard());
+					
 					pl.setScoreboard(board);
 				}
 			} else {
 				for (Player pl : arena.playersInArena) {
-					pl.setScoreboard(Bukkit.getScoreboardManager()
-							.getNewScoreboard());
+					if (ScoreboardHandler.originalScoreboards.containsKey(pl.getName())) {
+						pl.setScoreboard(ScoreboardHandler.originalScoreboards.get(pl.getName()));
+						ScoreboardHandler.originalScoreboards.remove(pl.getName());
+					}
 				}
 			}
 		}
@@ -69,18 +79,26 @@ public class ScoreboardHandler {
 			hiders.setScore(arena.playersInArena.size() - arena.seekers.size());
 			if (arena.gameState == ArenaState.INGAME) {
 				for (Player pl : arena.playersInArena) {
+					if (!ScoreboardHandler.originalScoreboards.containsKey(pl.getName()))
+						ScoreboardHandler.originalScoreboards.put(pl.getName(), pl.getScoreboard());
+					
 					pl.setScoreboard(board);
 				}
 			} else {
 				for (Player pl : arena.playersInArena) {
-					pl.setScoreboard(Bukkit.getScoreboardManager()
-							.getNewScoreboard());
+					if (ScoreboardHandler.originalScoreboards.containsKey(pl.getName())) {
+						pl.setScoreboard(ScoreboardHandler.originalScoreboards.get(pl.getName()));
+						ScoreboardHandler.originalScoreboards.remove(pl.getName());
+					}
 				}
 			}
 		}
 	}
 
 	public static void removeScoreboard(Player player) {
-		player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+		if (ScoreboardHandler.originalScoreboards.containsKey(player.getName())) {
+			player.setScoreboard(ScoreboardHandler.originalScoreboards.get(player.getName()));
+			ScoreboardHandler.originalScoreboards.remove(player.getName());
+		}
 	}
 }
