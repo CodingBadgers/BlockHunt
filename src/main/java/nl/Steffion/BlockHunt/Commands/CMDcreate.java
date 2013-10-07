@@ -33,7 +33,7 @@ public class CMDcreate extends DefaultCMD {
 								new ArrayList<ItemStack>(), null, null, null,
 								new ArrayList<String>(),
 								new ArrayList<String>(),
-								new ArrayList<String>(), 10, 50, 8,
+								new ArrayList<String>(),
 								new ArrayList<Player>(), ArenaState.WAITING, 0,
 								new ArrayList<Player>(), Bukkit
 										.getScoreboardManager()

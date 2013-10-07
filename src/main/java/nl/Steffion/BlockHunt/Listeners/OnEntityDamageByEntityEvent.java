@@ -6,7 +6,6 @@ import nl.Steffion.BlockHunt.Arena.ArenaState;
 import nl.Steffion.BlockHunt.ArenaHandler;
 import nl.Steffion.BlockHunt.ConfigC;
 import nl.Steffion.BlockHunt.W;
-import nl.Steffion.BlockHunt.Managers.MessageM;
 
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -24,11 +23,6 @@ public class OnEntityDamageByEntityEvent implements Listener {
 		Player player = null;
 		if (event.getEntity() instanceof Player) {
 			player = (Player) event.getEntity();
-		}
-
-		Player damager = null;
-		if (event.getDamager() instanceof Player) {
-			damager = (Player) event.getDamager();
 		}
 
 		if (player != null) {
@@ -60,43 +54,6 @@ public class OnEntityDamageByEntityEvent implements Listener {
 								W.pBlock.remove(player);
 
 								if (!arena.seekers.contains(player)) {
-									if (W.shop.getFile().get(
-											damager.getName() + ".tokens") == null) {
-										W.shop.getFile().set(
-												damager.getName() + ".tokens",
-												0);
-										W.shop.save();
-									}
-									int damagerTokens = W.shop.getFile()
-											.getInt(damager.getName()
-													+ ".tokens");
-									W.shop.getFile().set(
-											damager.getName() + ".tokens",
-											damagerTokens + arena.killTokens);
-									W.shop.save();
-
-									MessageM.sendFMessage(damager,
-											ConfigC.normal_addedToken,
-											"amount-" + arena.killTokens);
-
-									if (W.shop.getFile().get(
-											player.getName() + ".tokens") == null) {
-										W.shop.getFile()
-												.set(player.getName()
-														+ ".tokens", 0);
-										W.shop.save();
-									}
-									int playerTokens = W.shop.getFile().getInt(
-											player.getName() + ".tokens");
-									float addingTokens = ((float) arena.hidersTokenWin - (((float) arena.timer / (float) arena.gameTime) * (float) arena.hidersTokenWin));
-									W.shop.getFile().set(
-											player.getName() + ".tokens",
-											playerTokens + (int) addingTokens);
-									W.shop.save();
-
-									MessageM.sendFMessage(player,
-											ConfigC.normal_addedToken,
-											"amount-" + (int) addingTokens);
 
 									arena.seekers.add(player);
 									ArenaHandler

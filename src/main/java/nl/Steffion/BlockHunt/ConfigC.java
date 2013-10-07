@@ -36,7 +36,6 @@ public enum ConfigC {
 	commandEnabled_set (true, W.config),
 	commandEnabled_setwarp (true, W.config),
 	commandEnabled_remove (true, W.config),
-	commandEnabled_tokens (true, W.config),
 
 	autoUpdateCheck (true, W.config),
 	autoDownloadUpdate (false, W.config),
@@ -110,7 +109,6 @@ public enum ConfigC {
 	help_set ("%NOpens a panel to set settings.", W.messages),
 	help_setwarp ("%NSets warps for your arena.", W.messages),
 	help_remove ("%NDeletes an Arena.", W.messages),
-	help_tokens ("%NChange someones tokens.", W.messages),
 
 	button_add ("%NAdd %A%1%%N to %A%2%%N", W.messages),
 	button_add2 ("Add", W.messages),
@@ -152,11 +150,7 @@ public enum ConfigC {
 	normal_winHiders ("%TAG%NThe %AHIDERS%N have won!", W.messages),
 	normal_setwarpWarpSet ("%TAG%NSet warp '%A%warp%%N' to your location!",
 			W.messages),
-	normal_addedToken ("%TAG%A%amount%%N tokens were added to your account!",
-			W.messages),
 	normal_removeRemovedArena ("%TAG%NRemoved arena '%A%name%%N'!", W.messages),
-	normal_tokensChanged ("%TAG%N%option% %A%amount%%N tokens %option2% %A%playername%%N.",
-			W.messages),
 	normal_ingameNowSolid ("%TAG%NYou're now a solid '%A%block%%N' block!",
 			W.messages),
 	normal_ingameNoMoreSolid ("%TAG%NYou're no longer a solid block!",
@@ -218,12 +212,6 @@ public enum ConfigC {
 			W.messages),
 	error_setNotABlock ("%TAG%EThat is not a block!", W.messages),
 	error_setwarpWarpNotFound ("%TAG%EWarp '%A%warp%%E' is not valid!",
-			W.messages),
-	error_tokensPlayerNotOnline ("%TAG%ENo player found with the name '%A%playername%%E'!",
-			W.messages),
-	error_tokensUnknownsetting ("%TAG%E'%A%option%%E' is not a known option!",
-			W.messages),
-	error_shopNeedMoreTokens ("%TAG%EYou need more tokens before you can buy this item.",
 			W.messages);
 
 	public Object value;

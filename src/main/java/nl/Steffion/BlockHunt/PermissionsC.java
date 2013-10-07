@@ -34,8 +34,7 @@ public class PermissionsC {
 		set (main + "set", PType.MODERATOR),
 		setwarp (main + "setwarp", PType.MODERATOR),
 		signcreate (main + "signcreate", PType.MODERATOR),
-		remove (main + "remove", PType.ADMIN),
-		tokens (main + "tokens", PType.ADMIN);
+		remove (main + "remove", PType.ADMIN);
 
 		public String perm;
 		public PType type;

@@ -46,47 +46,7 @@ public class OnInventoryClickEvent implements Listener {
 
 				return;
 			} else if (inv.getName().startsWith("\u00A7r")) {
-				if (inv.getName().equals(
-						MessageM.replaceAll((String) "\u00A7r"
-								+ W.config.get(ConfigC.shop_title)))) {
-					event.setCancelled(true);
-					ItemStack item = event.getCurrentItem();
-					if (W.shop.getFile().get(player.getName() + ".tokens") == null) {
-						W.shop.getFile().set(player.getName() + ".tokens", 0);
-						W.shop.save();
-					}
-					int playerTokens = W.shop.getFile().getInt(
-							player.getName() + ".tokens");
-					if (item.getType().equals(Material.AIR))
-						return;
-					if (item.getItemMeta()
-							.getDisplayName()
-							.equals(MessageM.replaceAll(W.config.get(
-									ConfigC.shop_blockChooserName).toString()))) {
-						if (playerTokens >= (Integer) W.config
-								.get(ConfigC.shop_blockChooserPrice)) {
-							W.shop.getFile().set(
-									player.getName() + ".blockchooser", true);
-							W.shop.getFile()
-									.set(player.getName() + ".tokens",
-											playerTokens
-													- (Integer) W.config
-															.get(ConfigC.shop_blockChooserPrice));
-							W.shop.save();
-							MessageM.sendFMessage(
-									player,
-									ConfigC.normal_shopBoughtItem,
-									"itemname-"
-											+ W.config
-													.get(ConfigC.shop_blockChooserName));
-						} else {
-							MessageM.sendFMessage(player,
-									ConfigC.error_shopNeedMoreTokens);
-						}
-					}
-
-					InventoryHandler.openShop(player);
-				} else if (inv.getName().contains(
+				if (inv.getName().contains(
 						MessageM.replaceAll((String) W.config
 								.get(ConfigC.shop_blockChooserName)))) {
 					event.setCancelled(true);
@@ -168,21 +128,6 @@ public class OnInventoryClickEvent implements Listener {
 							updownButton(player, item, arena,
 									ArenaType.timeUntilHidersSword,
 									arena.timeUntilHidersSword, 1000, 0, 1, 1);
-						} else if (item.getItemMeta().getDisplayName()
-								.contains("hidersTokenWin")) {
-							updownButton(player, item, arena,
-									ArenaType.hidersTokenWin,
-									arena.hidersTokenWin, 1000, 0, 1, 1);
-						} else if (item.getItemMeta().getDisplayName()
-								.contains("seekersTokenWin")) {
-							updownButton(player, item, arena,
-									ArenaType.seekersTokenWin,
-									arena.seekersTokenWin, 1000, 0, 1, 1);
-						} else if (item.getItemMeta().getDisplayName()
-								.contains("killTokens")) {
-							updownButton(player, item, arena,
-									ArenaType.killTokens, arena.killTokens,
-									1000, 0, 1, 1);
 						}
 
 						save(arena);
@@ -232,15 +177,6 @@ public class OnInventoryClickEvent implements Listener {
 				case timeUntilHidersSword:
 					arena.timeUntilHidersSword = option + add;
 					break;
-				case hidersTokenWin:
-					arena.hidersTokenWin = option + add;
-					break;
-				case seekersTokenWin:
-					arena.seekersTokenWin = option + add;
-					break;
-				case killTokens:
-					arena.killTokens = option + add;
-					break;
 				}
 			} else {
 				MessageM.sendFMessage(player, ConfigC.error_setTooHighNumber,
@@ -270,15 +206,6 @@ public class OnInventoryClickEvent implements Listener {
 					break;
 				case timeUntilHidersSword:
 					arena.timeUntilHidersSword = option - remove;
-					break;
-				case hidersTokenWin:
-					arena.hidersTokenWin = option - remove;
-					break;
-				case seekersTokenWin:
-					arena.seekersTokenWin = option - remove;
-					break;
-				case killTokens:
-					arena.killTokens = option - remove;
 					break;
 				}
 			} else {

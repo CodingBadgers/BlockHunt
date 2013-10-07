@@ -325,19 +325,6 @@ public class ArenaHandler {
 					Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
 							command.replaceAll("%player%", player.getName()));
 				}
-
-				if (W.shop.getFile().get(player.getName() + ".tokens") == null) {
-					W.shop.getFile().set(player.getName() + ".tokens", 0);
-					W.shop.save();
-				}
-				int playerTokens = W.shop.getFile().getInt(
-						player.getName() + ".tokens");
-				W.shop.getFile().set(player.getName() + ".tokens",
-						playerTokens + arena.seekersTokenWin);
-				W.shop.save();
-
-				MessageM.sendFMessage(player, ConfigC.normal_addedToken,
-						"amount-" + arena.seekersTokenWin);
 			}
 		}
 
@@ -363,19 +350,6 @@ public class ArenaHandler {
 								Bukkit.getConsoleSender(),
 								command.replaceAll("%player%", player.getName()));
 					}
-
-					if (W.shop.getFile().get(player.getName() + ".tokens") == null) {
-						W.shop.getFile().set(player.getName() + ".tokens", 0);
-						W.shop.save();
-					}
-					int playerTokens = W.shop.getFile().getInt(
-							player.getName() + ".tokens");
-					W.shop.getFile().set(player.getName() + ".tokens",
-							playerTokens + arena.hidersTokenWin);
-					W.shop.save();
-
-					MessageM.sendFMessage(player, ConfigC.normal_addedToken,
-							"amount-" + arena.hidersTokenWin);
 				}
 			}
 		}

@@ -34,9 +34,6 @@ public class Arena implements ConfigurationSerializable {
 	public List<String> seekersWinCommands;
 	public List<String> hidersWinCommands;
 	public List<String> allowedCommands;
-	public int seekersTokenWin;
-	public int hidersTokenWin;
-	public int killTokens;
 
 	public List<Player> playersInArena;
 	public List<Player> readyPlayers;	
@@ -53,7 +50,6 @@ public class Arena implements ConfigurationSerializable {
 			LocationSerializable lobbyWarp, LocationSerializable hidersWarp,
 			LocationSerializable seekersWarp, List<String> seekersWinCommands,
 			List<String> hidersWinCommands, List<String> allowedCommands,
-			int seekersTokenWin, int hidersTokenWin, int killTokens,
 			List<Player> playersInArena, ArenaState gameState, int timer,
 			List<Player> seekers, Scoreboard scoreboard) {
 		this.arenaName = arenaName;
@@ -73,9 +69,6 @@ public class Arena implements ConfigurationSerializable {
 		this.seekersWinCommands = seekersWinCommands;
 		this.hidersWinCommands = hidersWinCommands;
 		this.allowedCommands = allowedCommands;
-		this.seekersTokenWin = seekersTokenWin;
-		this.hidersTokenWin = hidersTokenWin;
-		this.killTokens = killTokens;
 
 		this.playersInArena = playersInArena;
 		this.readyPlayers = new ArrayList<Player>();
@@ -93,9 +86,6 @@ public class Arena implements ConfigurationSerializable {
 		waitingTimeSeeker,
 		gameTime,
 		timeUntilHidersSword,
-		hidersTokenWin,
-		seekersTokenWin,
-		killTokens;
 	}
 
 	public enum ArenaState {
@@ -122,9 +112,6 @@ public class Arena implements ConfigurationSerializable {
 		map.put("seekersWinCommands", seekersWinCommands);
 		map.put("hidersWinCommands", hidersWinCommands);
 		map.put("allowedCommands", allowedCommands);
-		map.put("seekersTokenWin", seekersTokenWin);
-		map.put("hidersTokenWin", hidersTokenWin);
-		map.put("killTokens", killTokens);
 		return map;
 	}
 
@@ -151,10 +138,7 @@ public class Arena implements ConfigurationSerializable {
 						new ArrayList<String>()), (ArrayList<String>) M.g(map,
 						"hidersWinCommands", new ArrayList<String>()),
 				(ArrayList<String>) M.g(map, "allowedCommands",
-						new ArrayList<String>()), (Integer) M.g(map,
-						"seekersTokenWin", 10), (Integer) M.g(map,
-						"hidersTokenWin", 50), (Integer) M.g(map, "killTokens",
-						8), new ArrayList<Player>(), ArenaState.WAITING, 0,
+						new ArrayList<String>()), new ArrayList<Player>(), ArenaState.WAITING, 0,
 				new ArrayList<Player>(), Bukkit.getScoreboardManager()
 						.getNewScoreboard());
 	}

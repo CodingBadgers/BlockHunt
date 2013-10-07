@@ -20,9 +20,7 @@ import nl.Steffion.BlockHunt.Commands.CMDreload;
 import nl.Steffion.BlockHunt.Commands.CMDremove;
 import nl.Steffion.BlockHunt.Commands.CMDset;
 import nl.Steffion.BlockHunt.Commands.CMDsetwarp;
-import nl.Steffion.BlockHunt.Commands.CMDshop;
 import nl.Steffion.BlockHunt.Commands.CMDstart;
-import nl.Steffion.BlockHunt.Commands.CMDtokens;
 import nl.Steffion.BlockHunt.Commands.CMDwand;
 import nl.Steffion.BlockHunt.Listeners.OnBlockBreakEvent;
 import nl.Steffion.BlockHunt.Listeners.OnBlockPlaceEvent;
@@ -98,7 +96,6 @@ public class BlockHunt extends JavaPlugin implements Listener {
 			add("set");
 			add("setwarp");
 			add("remove");
-			add("tokens");
 		}
 	};
 
@@ -109,14 +106,12 @@ public class BlockHunt extends JavaPlugin implements Listener {
 	public static CommandM CMDjoin;
 	public static CommandM CMDleave;
 	public static CommandM CMDlist;
-	public static CommandM CMDshop;
 	public static CommandM CMDstart;
 	public static CommandM CMDwand;
 	public static CommandM CMDcreate;
 	public static CommandM CMDset;
 	public static CommandM CMDsetwarp;
 	public static CommandM CMDremove;
-	public static CommandM CMDtokens;
 
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
@@ -186,10 +181,6 @@ public class BlockHunt extends JavaPlugin implements Listener {
 				Permissions.list, ConfigC.help_list,
 				(Boolean) W.config.get(ConfigC.commandEnabled_list),
 				BlockHuntCMD, new CMDlist(), "/BlockHunt <list|li>");
-		CMDshop = new CommandM("BlockHunt SHOP", "BlockHunt", "shop", "sh",
-				Permissions.shop, ConfigC.help_shop,
-				(Boolean) W.config.get(ConfigC.commandEnabled_shop),
-				BlockHuntCMD, new CMDshop(), "/BlockHunt <shop|sh>");
 		CMDstart = new CommandM("BlockHunt START", "BlockHunt", "start", "go",
 				Permissions.start, ConfigC.help_start,
 				(Boolean) W.config.get(ConfigC.commandEnabled_start),
@@ -218,11 +209,6 @@ public class BlockHunt extends JavaPlugin implements Listener {
 				(Boolean) W.config.get(ConfigC.commandEnabled_remove),
 				BlockHuntCMD, new CMDremove(),
 				"/BlockHunt <remove|delete> <arenaname>");
-		CMDtokens = new CommandM("BlockHunt TOKENS", "BlockHunt", "tokens",
-				"t", Permissions.tokens, ConfigC.help_tokens,
-				(Boolean) W.config.get(ConfigC.commandEnabled_tokens),
-				BlockHuntCMD, new CMDtokens(),
-				"/BlockHunt <tokens|t> <set|add|take> <playername> <amount>");
 
 		if (!getServer().getPluginManager().isPluginEnabled("LibsDisguises")) {
 			MessageM.broadcastFMessage(ConfigC.error_libsDisguisesNotInstalled);
