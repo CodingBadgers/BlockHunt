@@ -7,6 +7,7 @@ import nl.Steffion.BlockHunt.Managers.MessageM;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -41,6 +42,12 @@ public class ScoreboardHandler {
 					.replaceAll((String) W.config
 							.get(ConfigC.scoreboard_hiders))));
 			hiders.setScore(arena.playersInArena.size() - arena.seekers.size());
+			
+			for (ItemStack blockType : arena.disguiseBlocks) {
+				Score block = object.getScore(Bukkit.getOfflinePlayer(formatMaterialName(blockType.getType().name())));
+				block.setScore(1);
+			}
+			
 			if (arena.gameState == ArenaState.INGAME) {
 				for (Player pl : arena.playersInArena) {
 					if (!ScoreboardHandler.originalScoreboards.containsKey(pl.getName()))
@@ -57,6 +64,17 @@ public class ScoreboardHandler {
 				}
 			}
 		}
+	}
+
+	private static String formatMaterialName(String name) {
+		name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+		name = name.replaceAll("_", " ");
+		
+		if (name.length() > 15) {
+			name = name.substring(0, 15);
+		}
+		
+		return name;
 	}
 
 	public static void updateScoreboard(Arena arena) {
@@ -77,6 +95,12 @@ public class ScoreboardHandler {
 					.replaceAll((String) W.config
 							.get(ConfigC.scoreboard_hiders))));
 			hiders.setScore(arena.playersInArena.size() - arena.seekers.size());
+			
+			for (ItemStack blockType : arena.disguiseBlocks) {
+				Score block = object.getScore(Bukkit.getOfflinePlayer(formatMaterialName(blockType.getType().name())));
+				block.setScore(0);
+			}
+			
 			if (arena.gameState == ArenaState.INGAME) {
 				for (Player pl : arena.playersInArena) {
 					if (!ScoreboardHandler.originalScoreboards.containsKey(pl.getName()))

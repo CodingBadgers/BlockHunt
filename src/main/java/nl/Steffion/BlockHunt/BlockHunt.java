@@ -449,8 +449,12 @@ public class BlockHunt extends JavaPlugin implements Listener {
 					for (Player player : arena.seekers) {
 						if (player.getInventory().getItem(0) == null
 								|| player.getInventory().getItem(0).getType() != Material.DIAMOND_SWORD) {
-							player.getInventory().setItem(0,
-									new ItemStack(Material.DIAMOND_SWORD, 1));
+							
+							ItemStack sword = new ItemStack(Material.DIAMOND_SWORD, 1);
+							sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+							sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
+							
+							player.getInventory().setItem(0, sword);
 							player.getInventory().setHelmet(
 									new ItemStack(Material.IRON_HELMET, 1));
 							player.getInventory().setChestplate(
@@ -471,7 +475,7 @@ public class BlockHunt extends JavaPlugin implements Listener {
 								W.seekertime.remove(player);
 								
 								// Give players speed potion
-								PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, (int) (arena.gameTime * 20L), 0, true);	
+								PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, (int) (arena.gameTime * 20L), 1, true);	
 								player.addPotionEffect(effect, true);
 							}
 						}
@@ -557,8 +561,8 @@ public class BlockHunt extends JavaPlugin implements Listener {
 										player.updateInventory();
 									}
 								}
-
-								if (moveLoc != null) {
+								
+								if (moveLoc != null && block != null) {
 									if (moveLoc.getX() == pLoc.getX()
 											&& moveLoc.getY() == pLoc.getY()
 											&& moveLoc.getZ() == pLoc.getZ()) {
@@ -658,7 +662,7 @@ public class BlockHunt extends JavaPlugin implements Listener {
 														ConfigC.warning_ingameNoSolidPlace);
 											}
 										}
-									} else {
+									} else if (block != null) {
 										block.setAmount(5);
 										if (!DisguiseAPI.isDisguised(player)) {
 											SolidBlockHandler

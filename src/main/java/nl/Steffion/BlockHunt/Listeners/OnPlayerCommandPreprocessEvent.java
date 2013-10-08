@@ -2,6 +2,7 @@ package nl.Steffion.BlockHunt.Listeners;
 
 import nl.Steffion.BlockHunt.Arena;
 import nl.Steffion.BlockHunt.ConfigC;
+import nl.Steffion.BlockHunt.PermissionsC;
 import nl.Steffion.BlockHunt.W;
 import nl.Steffion.BlockHunt.Managers.MessageM;
 
@@ -17,6 +18,10 @@ public class OnPlayerCommandPreprocessEvent implements Listener {
 	public void onPlayerCommandPreprocessEvent(
 			PlayerCommandPreprocessEvent event) {
 		Player player = event.getPlayer();
+		
+		if (player.hasPermission(PermissionsC.main + "admin")) {
+			return;
+		}
 
 		for (Arena arena : W.arenaList) {
 			if (arena.playersInArena.contains(player)) {

@@ -9,7 +9,10 @@ import nl.Steffion.BlockHunt.W;
 
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -24,8 +27,24 @@ public class OnEntityDamageByEntityEvent implements Listener {
 		if (event.getEntity() instanceof Player) {
 			player = (Player) event.getEntity();
 		}
+		
+		Player damager = null;
 
-		if (player != null) {
+		if (event.getDamager() instanceof Player) {
+			damager = (Player)event.getDamager();
+		}
+		
+		if (event.getDamager() instanceof Projectile) {
+			Entity projectile = (Projectile)event.getDamager();
+			projectile.remove();
+			
+			LivingEntity shooter = ((Projectile)event.getDamager()).getShooter();
+			if (shooter instanceof Player) {
+				damager = (Player)shooter;
+			}
+		}
+
+		if (player != null && damager != null) {
 			for (Arena arena : W.arenaList) {
 				if (arena.playersInArena.contains(player)) {
 					if (arena.gameState == ArenaState.WAITING
@@ -33,17 +52,15 @@ public class OnEntityDamageByEntityEvent implements Listener {
 						event.setCancelled(true);
 					} else {
 						if (arena.seekers.contains(player)
-								&& arena.seekers.contains(event.getDamager())) {
+								&& arena.seekers.contains(damager)) {
 							event.setCancelled(true);
 						} else if (arena.playersInArena.contains(player)
-								&& arena.playersInArena.contains(event
-										.getDamager())
-								&& !arena.seekers.contains(event.getDamager())
+								&& arena.playersInArena.contains(damager)
+								&& !arena.seekers.contains(damager)
 								&& !arena.seekers.contains(player)) {
 							event.setCancelled(true);
 						} else {
-							player.getWorld().playSound(player.getLocation(),
-									Sound.HURT_FLESH, 1, 1);
+							player.getWorld().playSound(player.getLocation(), Sound.HURT_FLESH, 1, 1);
 
 							if (event.getDamage() >= player.getHealth()) {
 								player.setHealth(20);

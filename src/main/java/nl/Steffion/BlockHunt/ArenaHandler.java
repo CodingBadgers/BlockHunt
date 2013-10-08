@@ -203,6 +203,7 @@ public class ArenaHandler {
 			if (arena2.playersInArena != null) {
 				if (arena2.playersInArena.contains(player)) {
 					arena = arena2;
+					break;
 				}
 			}
 		}
