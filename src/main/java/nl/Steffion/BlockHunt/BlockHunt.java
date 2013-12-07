@@ -390,9 +390,10 @@ public class BlockHunt extends JavaPlugin implements Listener {
 									}
 
 									MiscDisguise disguise = new MiscDisguise(
-											DisguiseType.FALLING_BLOCK, block
-													.getTypeId(), block
-													.getDurability());
+											DisguiseType.FALLING_BLOCK, 
+											block.getTypeId(), 
+											block.getDurability());
+									
 									DisguiseAPI.disguiseToAll(arenaPlayer,
 											disguise);
 
